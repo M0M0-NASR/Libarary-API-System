@@ -144,7 +144,7 @@ router.put(
 );
 
 // get all books
-router.get("/", async (req, res) => {
+router.get("/", authorazied, async (req, res) => {
   try {
     const query = util.promisify(db.query).bind(db);
 
@@ -174,7 +174,7 @@ router.get("/", async (req, res) => {
 });
 
 // get one book by ISBN
-router.get("/:ISBN", async (req, res) => {
+router.get("/:ISBN", authorazied, async (req, res) => {
   try {
     const query = util.promisify(db.query).bind(db);
 
@@ -259,6 +259,7 @@ router.post("/request/:ISBN", authorazied, async (req, res) => {
         },
       ],
     });
+    res.status(200).json({ msg: "Request add to book" });
   } catch (error) {
     console.log(error);
   }
