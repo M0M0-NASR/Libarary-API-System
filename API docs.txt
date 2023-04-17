@@ -1,0 +1,416 @@
+================================ end points ==================================== 
+	========================== Book modules ========================= 
+
+=============
+|LIBRARIAN|
+=============
+	
+UPDATE BOOK
+
+	http://localhost:4000/book/:ISBN
+
+method type:
+	 PUT
+
+data_send:
+
+	title , author subject , rack_number , file(img) may add or not
+
+header:
+	token ====> it user token to check admin or user
+	
+ex:
+	http://localhost:4000/book/NHGHPHBZFX
+
+return:
+	{errors}
+	{msg}
+
+desc:
+	to update book inforamation.
+	
+================================================================================
+=============
+|LIBRARIAN|
+=============
+
+DELETE BOOK
+
+	http://localhost:4000/book/:ISBN
+
+method type:
+	 DELETE
+
+
+data_send:
+
+	NONE
+
+header:
+	token ====> it user token to check admin or user
+	
+ex:
+	http://localhost:4000/book/NHGHPHBZFX
+
+
+return:
+	{errors}
+	{msg}
+
+
+desc:
+	to delete book by ISBN .
+	
+==============================================================================
+
+=============
+|LIBRARIAN|
+=============
+
+ADD BOOK	
+	http://localhost:4000/book/
+
+method type:
+
+	 POST
+
+
+data_send:
+
+	title , author subject , rack_number , file(img) may add or not
+
+header:
+	token ====> it user token to check admin or user
+	
+ex:
+	http://localhost:4000/book/NHGHPHBZFX
+
+return:
+	{errors}
+	{msg}
+
+
+desc:
+	to update book inforamation.
+
+===============================================================================
+=============
+|NORMAL USER|
+=============
+
+GET ALL BOOK	
+	http://localhost:4000/book
+
+method type:
+
+	 GET
+
+data_send:
+	NONE
+header:
+	token ====> it user token to check admin or user
+	
+ex:
+	http://localhost:4000/book/
+
+return:
+	{errors}
+	{books}
+
+
+desc:
+	to get all books
+==============================================================================
+=============
+|NORMAL USER|
+=============
+
+GET ALL BOOK WIT SEARCH	
+	http://localhost:4000/book?search=
+
+method type:
+
+	 GET
+
+data_send:
+	SEARCH PARAM 
+header:
+	token ====> it user token to check admin or user
+	
+ex:
+	http://localhost:4000/book?search=asdad
+
+return:
+	{errors}
+	{books}
+
+
+desc:
+	get Books with ISBN asdad
+
+===============================================================================
+=============
+|NORMAL USER|
+=============
+
+GET ONE BOOK WIT ISBN	
+	http://localhost:4000/book/:ISBN
+
+method type:
+
+	 GET
+
+data_send:
+	NONE
+header:
+	token ====> it user token to check admin or user and loged in
+	
+ex:
+	http://localhost:4000/book/LSDBJREHBU
+
+return:
+	{errors}
+	{book}
+
+
+desc:
+	get one Book with ISBN
+================================================================================
+=============
+|NORMAL USER|
+=============
+
+MAKE REQUEST TO BOOK	
+	http://localhost:4000/book/:ISBN
+
+method type:
+
+	 POST
+
+data_send:
+	NONE
+header:
+	token ====> it user token to check admin or user and loged in
+	
+ex:
+	http://localhost:4000/book/LSDBJREHBU
+
+return:
+	{errors}
+	{msg}
+
+
+desc:
+	to make request to book
+==============================================================================
+	========================== Auth modules ========================= 
+=============
+|NORMAL USER|
+=============
+
+MAKE RIGSTRATION REQUEST TO USER 	
+	http://localhost:4000/auth/register
+
+method type:
+
+	 POST
+
+data_send:
+	email , pass , name , phone
+header:
+	NONR
+ex:
+	http://localhost:4000/auth/register
+return:
+	{errors}
+	{msg}
+
+
+desc:
+	to make registerion request
+
+=============================================================================
+=============
+|LIBRARIAN|
+=============
+|NORMAL USER|
+=============  
+
+LOG IN  	
+	http://localhost:4000/auth/login
+
+method type:
+
+	 POST
+
+data_send:
+	email , pass 
+header:
+	NONR
+ex:
+	http://localhost:4000/auth/login
+return:
+	{errors}
+	{user}
+
+
+desc:
+	to login user and admin
+
+==============================================================================
+=============
+|LIBRARIAN|
+=============
+|NORMAL USER|
+=============  
+
+LOG OUT 	
+	http://localhost:4000/auth/logout
+
+method type:
+
+	 POST
+
+data_send:
+	NONE
+header:
+	NONE
+ex:
+	http://localhost:4000/auth/logout
+return:
+	{errors}
+	{msg}
+
+
+desc:
+	to logout user and admin
+
+==============================================================================
+	========================== Librarian modules ==================== 
+=============
+|LIBRARIAN|
+=============
+
+GET REGISTRATION REQUEST 	
+	http://localhost:4000/lib/reg_requests
+
+method type:
+
+	 GET
+
+data_send:
+	NONE
+header:
+	token
+ex:
+	http://localhost:4000/lib/reg_requests
+return:
+	{errors}
+	{requests}
+desc:
+	return registrtion request
+===============================================================================
+=============
+|LIBRARIAN|
+=============
+
+APPROVE REGISTRATION REQUEST 	
+	http://localhost:4000/lib/reg_requests/:user_id
+
+method type:
+
+	 PUT
+
+data_send:
+	numberOfBook
+header:
+	token
+ex:
+	http://localhost:4000/lib/reg_requests/12
+
+return:
+	{errors}
+	{msg}
+desc:
+	aprrove registrtion request and set number of book to borrowed
+===============================================================================
+=============
+|LIBRARIAN|
+=============
+
+GET BOOK REQUEST 	
+	http://localhost:4000/lib/book_requests
+
+method type:
+
+	 GET
+
+data_send:
+	NONE
+header:
+	token
+ex:
+	http://localhost:4000/lib/book_requests
+return:
+	{errors}
+	{books}
+desc:
+	return books request
+===============================================================================
+=============
+|LIBRARIAN|
+=============
+
+GET REGISTRATION REQUEST 	
+	http://localhost:4000/lib/book_requests/:id    id is in requset table in database
+
+method type:
+
+	 PUT
+
+data_send:
+	NONE
+
+header:
+	token
+
+ex:
+	http://localhost:4000/lib/book_requests/2
+return:
+	{errors}
+	{masg}
+desc:
+	add book to user 
+===============================================================================
+
+	========================== User modules =========================
+
+=============
+|NORMAL USER|
+=============  
+
+GET BORROWED BOOKS 	
+	http://localhost:4000/user/
+
+method type:
+
+	 GET
+
+data_send:
+	NONE
+header:
+	token
+ex:
+	http://localhost:4000/user/
+return:
+	{errors}
+	{books}
+
+desc:
+	return books that user borrowed
+
+================================================================================
+
+
+
+ 
