@@ -32,9 +32,10 @@ router.post(
       // 1- validtion requst manual
       // 1-check email exist
       const query = util.promisify(db.query).bind(db);
-      const checkEmailQuery = await query("select * from user where email= ?", [
-        req.body.email,
-      ]);
+      const checkEmailQuery = await query(
+        "select * from users where email= ?",
+        [req.body.email]
+      );
 
       if (checkEmailQuery.length > 0) {
         return res.status(400).json({
@@ -64,7 +65,7 @@ router.post(
       };
 
       // 3- insert data to db
-      await query("insert into user set ?", userData);
+      await query("insert into users set ?", userData);
       delete userData.pass;
       res
         .status(200)
@@ -94,7 +95,7 @@ router.post(
       // 1- validtion requst manual
       // 1-check email exist
       const query = util.promisify(db.query).bind(db);
-      const user = await query("select * from user where email= ?", [
+      const user = await query("select * from users where email= ?", [
         req.body.email,
       ]);
 

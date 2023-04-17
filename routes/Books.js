@@ -233,7 +233,7 @@ router.post("/request/:ISBN", authorazied, async (req, res) => {
 
     // 1-check user not request same book
     result = await query(
-      "select * from request where user_id = ? AND ISBN = ?",
+      "select * from book_requests where user_id = ? AND ISBN = ?",
       [user.id, ISBN]
     );
 
@@ -250,7 +250,7 @@ router.post("/request/:ISBN", authorazied, async (req, res) => {
     };
 
     // 3- insert into database
-    await query("insert into request set ?", requestData);
+    await query("insert into book_requests set ?", requestData);
     res.json({
       errors: [
         {
